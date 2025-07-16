@@ -1,19 +1,23 @@
 # Fazendo documentações de apis Express com Swagger
 
+🧱 1. Instale a biblioteca
+
 Baixe a biblioteca Swagger UI Express:
 
 ```
 npm install swagger-ui-express
 ```
 
-crie na raiz do projeto um arquivo chamado swwagger.json ou swwagger.yaml e coloque uma chave vazia em seu conteúdo:
+### 📄 2. Crie o arquivo `swagger.json` na raiz do projeto
+
+Crie na raiz do projeto um arquivo chamado swwagger.json ou swagger.yaml e coloque uma chave vazia em seu conteúdo:
 
 ```json
 swagger.json
 {}
 ```
 
-Importe em server.js o swaggerUi:
+### 📦 3. Importe e configure o Swagger UI no `server.js`
 
 ```js
 const express = require("express");
@@ -34,13 +38,15 @@ app.use("api-docs", swaggerUi.serve, swaggerUi.setup(require("./swagger")));
 // app.use("api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 ```
 
-Visite _http://localhost:3000/api-docs/_ e vera algo proximo a isso:
+Visite [_http://localhost:3000/api-docs/_](http://localhost:3000/api-docs](http://localhost:3000/api-docs)) e vera algo proximo a isso:
 
 <p align="center">
     <img src="assets/swagger-init.png" alt="Swagger UI Example" />
 </p>
 
-Como não temos nenhuma definição até o momento a documentação ainda não estará acessível, adicione agora o cabeçalho de nossa documentação acesse novamente http://localhost:3000/api-docs/:
+### 📚 4. Estrutura básica do Swagger
+
+Como não temos nenhuma definição até o momento a documentação ainda não estará acessível, adicione agora o cabeçalho de nossa documentação e acesse novamente http://localhost:3000/api-docs/:
 
 ```json
 {
@@ -59,13 +65,16 @@ Vera algo proximo a isso:
     <img src="assets/swagger-info.png" alt="Swagger UI Example" />
 </p>
 
-O swagger também possui uma documentação de test que pode ser acessada em https://petstore.swagger.io/ é assim que queremos que nossa documentação de api fique ao final do projeto
+Swagger também possui uma documentação de teste em: [https://petstore.swagger.io/](https://petstore.swagger.io/) — é assim que queremos que nossa documentação final fique:
 
 <p align="center">
     <img src="assets/swagger-petstore.png" alt="Swagger UI Example" />
 </p>
 
-Podemos também acessar o json utilizado para gerar essa documentação em https://petstore.swagger.io/v2/swagger.json
+Você também pode acessar o JSON usado por essa documentação em: [https://petstore.swagger.io/v2/swagger.json](https://petstore.swagger.io/v2/swagger.json)
+
+
+### 🧩 5. Melhorando o cabeçalho
 
 Agora vamos deixar essa cabeçalho um pouco mais completo, iremos adicionar uma rota de acesso aos termos de uso de nossa api que poderá ser disponibilizada através de uma pagina estática fornecida pelo servido ou uma rota a parte, também colocaremos um contato de referencia
 
@@ -83,25 +92,32 @@ Agora vamos deixar essa cabeçalho um pouco mais completo, iremos adicionar uma 
     },
 ```
 
-Em seguida vamos informar quais urls nossa Api estará disponibilizada
+### 🌐 6. Definindo servidores
+
+Em seguida vamos informar quais urls nossa Api será disponibilizada
 
 ```json
     "servers": [{
         "url": "http://localhost:3000/v1",
         "description": "Ambiente de desenvolvimento"
-     },{
+     },
+     {
         "url": "www.crudJourney.com/v2",
         "description": "Ambiente de produção"
      }
     ]
 ```
 
+### 📌 7. Mapeando rotas da API
+
+#### Rota GET `/posts`
+
 Agora iremos fazer um mapeamento de todas as rotas presente ou que futuramente estarão presentes em nossa api, vamos iniciar mapeando a rota de primeira rota de get:
 
 ```json
 "paths": {
         "/posts":{
-            "sumarry": "Retorna todos os posts",
+            "summary": "Retorna todos os posts",
             "description": "Essa rota será responsável por retorna todos os posts",
             "get": {
                 "tags": ["Posts"],
@@ -118,7 +134,10 @@ Agora iremos fazer um mapeamento de todas as rotas presente ou que futuramente e
 }
 ```
 
-Para post teremos um tratamento um pouco diferente, teremos uma propriedade chamada _requestBody_ que será responsável por dizer o tipo de dado requerido, que no nosso caso é o application/json, que por sua vez conterá o schema, ou seja o esquema referente ao formato como esses dados devem ser enviados, com seus atributos e tipos, veja que o esquema e feito através de um componente que é referenciado através do _$ref_, o esquema em sí foi definido em "componentes":
+#### Rota POST `/posts` com `requestBody`
+
+
+Para o método post teremos um tratamento um pouco diferente, teremos uma propriedade chamada _requestBody_ que será responsável por dizer o tipo de dado requerido, que no nosso caso é o application/json, que por sua vez conterá o schema, ou seja o esquema referente ao formato como esses dados devem ser enviados, com seus atributos e tipos, veja que o esquema e feito através de um componente que é referenciado através do _$ref_, o esquema em sí foi definido em "componentes":
 
 ```json
     "post": {
@@ -174,7 +193,9 @@ Para post teremos um tratamento um pouco diferente, teremos uma propriedade cham
   }
 ```
 
-Extra: Caso a api use varições de segurança como JWT, também se é precisos informá-la em nossa documentação, para isso criamos um campo de securitySchemes no mesmo nível do schema em componentes
+### 🔐 8. Autenticação com JWT
+
+Extra: Caso a api use autentificações de segurança como JWT, também se é preciso informar em nossa documentação, para isso criamos um campo de securitySchemes no mesmo nível do schema em componentes
 
 ```json
 "components": {
@@ -191,7 +212,16 @@ Extra: Caso a api use varições de segurança como JWT, também se é precisos 
   }
 ```
 
-Agora nas rotas definidas adicione uma tag de security, no mesmo nivel do summary, description e tags, dessa forma:
+Entenda melhor a estrutura do schemas de autentificação:
+
+| Campo                   | Significado                                                                                                   |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `"type": "http"`        | Diz que o tipo de segurança é baseado em HTTP.                                                                |
+| `"scheme": "bearer"`    | Indica que a autenticação é via o esquema **Bearer Token**. Ex: `Authorization: Bearer <token>`               |
+| `"bearerFormat": "JWT"` | Apenas uma **dica para ferramentas** como Swagger UI saberem que o token é um JWT. Não afeta a lógica da API. |
+
+
+Agora nas rotas protegidas adicione uma tag de security, no mesmo nivel do summary, description e tags, dessa forma:
 
 ```json
 "paths": {
@@ -212,7 +242,13 @@ Acesse novamente nossa documentação em http://localhost:3000/api-docs/ e veja 
     <img src="assets/swagger-rota-autenticada.png" alt="Swagger UI Example" />
 </p>
 
-Para rotas que exigem a passagem de parâmetros o query criamos uma rota no mesmo nivel da anterior rota defina como _/posts_, veja o exemplo:
+
+### 🔍 9. Parâmetros em rotas
+
+#### GET `/posts/{id}`
+
+
+Para rotas que exigem a passagem de parâmetros (params ou query) criamos uma rota no mesmo nível da anterior rota defina como _/posts_, no entanto agorá definimos em parameters o tipo de parâmetro exigido, informando o nome do parâmetro, se sera através de query, ou params (path), se seu envio é obrigatório (required) e seu esquema de tipo, veja o exemplo:
 
 ```json
 "paths": {
@@ -232,18 +268,16 @@ Para rotas que exigem a passagem de parâmetros o query criamos uma rota no mesm
         "parameters": [
           {
             "name": "id",
-            "in": "path",
+            "in": "path", //ou query
             "required": true,
             "schema": {
               "type": "number"
             }
           }
         ],
-        "security": [
-          {
+        "security": [{
             "bearerAuth": []
-          }
-        ],
+        }],
         "responses": {
           "200": {
             "description": "Retorna o post pertencente ao {id}",
@@ -268,12 +302,14 @@ Para rotas que exigem a passagem de parâmetros o query criamos uma rota no mesm
     }
 ```
 
-Veja que agora na rota apresentada em nossa documentação sera criado um campo de teste onde poderemos adicionar um id de busca: 
+Veja que agora na rota apresentada em nossa documentação sera criado um campo de teste onde poderemos adicionar um id de busca, tornando a busca especifica pelo {id} passado: 
 
 
 <p align="center">
     <img src="assets/swagger-rota-params.png" alt="Swagger UI Example" />
 </p>
+
+### ✏️ 10. PUT `/posts/{id}` – Atualização completa
 
 De forma semelhante agora podemos criar a documentação de nossas rotas de _PUT_ (atualização total) e _DELETE_, para a rota de _PUT_ segue o exemplo a baixo, veremos que nada mais do que se trata de uma adição de um _requestBody_ para informar os dados que serão enviados para atualização do post pertencente ao id informado em _parameters_, veja:
 
@@ -342,8 +378,9 @@ De forma semelhante agora podemos criar a documentação de nossas rotas de _PUT
     }
 ```
 
+### 🗑️ 11. DELETE `/posts/{id}`
 
-E para a rota de delete, 
+E para a rota de delete:
 
 ```json
     "/posts/{id}": {
@@ -370,7 +407,7 @@ E para a rota de delete,
         }],
         "responses": {
           "200": {
-            "description": "Retorna o post pertencente ao {id} foi deletado",
+            "description": "Retorna se o post pertencente ao {id} foi deletado",
             "content": {
               "application/json": {
                 "schema": {
@@ -389,9 +426,9 @@ E para a rota de delete,
       }
     },
 ```
+### 📁 12. Rota `/docs-swagger` para documentação JSON
 
-E para finalizar podemos documentar uma rota que será responsável por fornecer nossa documentação em json:
-
+E para finalizar podemos documentar uma rota que será responsável por fornecer nossa documentação em json, fornecimento feito através do envio de um arquivo estático, neste caso nosso swagger.json:
 
 ```json
   "paths": {
@@ -418,3 +455,19 @@ E para finalizar podemos documentar uma rota que será responsável por fornecer
     }
   },
 ```
+
+### 🌐 13 Visualização final
+
+Veja por fim como ficou nossa documentação de nossa api:
+
+<p align="center">
+    <img src="assets/swagger-visualizacao-final.png" alt="Swagger UI Example" />
+</p>
+
+Lembre-se que isso não é tudo. Muito mais pode ser explorado.
+
+✅ Agora sua documentação Swagger está completa, com suporte para autenticação, rotas REST, schemas e testes interativos.
+
+Use https://editor.swagger.io para validar seu swagger.json!
+
+📘 Esse tutorial foi escrito por Davi Cândido – PUC Minas. Compartilhe com colegas desenvolvedores!
