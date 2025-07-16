@@ -389,3 +389,32 @@ E para a rota de delete,
       }
     },
 ```
+
+E para finalizar podemos documentar uma rota que será responsável por fornecer nossa documentação em json:
+
+
+```json
+  "paths": {
+    "/posts": {
+       ...
+    },
+    "/posts/{id}": {
+      ...
+    },
+    "/docs-swagger": {
+      "get": {
+        "summary": "Retorna a documentação em json da api feita pelo swagger",
+        "description": "Essa rota retorna a documentação em json da api feita pelo swagger",
+        "tags": ["Documentação"],
+        "responses": {
+          "200": {
+            "description": "Retorna a documentação",
+            "content": {
+              "text/json": {}
+            }
+          }
+        }
+      }
+    }
+  },
+```

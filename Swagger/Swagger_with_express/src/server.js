@@ -26,7 +26,7 @@ app.use("/v1/posts", router);
 
 
 
-app.use("/docs-swagger", (req, res) => {
+app.get("/v1/docs-swagger", (req, res) => {
   res.sendFile(path.join(__dirname, "swagger.json"));
 });
 
