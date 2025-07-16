@@ -112,7 +112,7 @@ Em seguida vamos informar quais urls nossa Api será disponibilizada
 
 #### Rota GET `/posts`
 
-Agora iremos fazer um mapeamento de todas as rotas presente ou que futuramente estarão presentes em nossa api, vamos iniciar mapeando a rota de primeira rota de get:
+Agora iremos fazer um mapeamento de todas as rotas presente ou que futuramente estarão presentes em nossa api, vamos iniciar mapeando a nossa primeira rota de get:
 
 ```json
 "paths": {
