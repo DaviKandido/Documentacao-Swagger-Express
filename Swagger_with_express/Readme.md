@@ -97,6 +97,10 @@ Agora vamos deixar essa cabeçalho um pouco mais completo, iremos adicionar uma 
 Em seguida vamos informar quais urls nossa Api será disponibilizada
 
 ```json
+  "openapi": "3.0.0",
+    "info": {
+      ...
+    },
     "servers": [{
         "url": "http://localhost:3000/v1",
         "description": "Ambiente de desenvolvimento"
@@ -115,7 +119,12 @@ Em seguida vamos informar quais urls nossa Api será disponibilizada
 Agora iremos fazer um mapeamento de todas as rotas presente ou que futuramente estarão presentes em nossa api, vamos iniciar mapeando a nossa primeira rota de get:
 
 ```json
-"paths": {
+  "openapi": "3.0.0",
+    "info": {
+      ...
+    },
+    "servers": ...,
+    "paths": {
         "/posts":{
             "summary": "Retorna todos os posts",
             "description": "Essa rota será responsável por retorna todos os posts",
@@ -125,6 +134,53 @@ Agora iremos fazer um mapeamento de todas as rotas presente ou que futuramente e
                     "200": {
                         "description": "Retorna todos os posts"
                     },
+                    "404": {
+                        "description": "Nenhum post foi encontrado"
+                    }
+                }
+            }
+        }
+      }
+```
+
+Podemos também colocar um conteudo de exemplo que será retornado ao obtermos o status de resposta 200:
+
+
+```json
+"paths": {
+        "/posts":{
+            "summary": "Retorna todos os posts",
+            "description": "Essa rota será responsável por retorna todos os posts",
+            "get": {
+                "tags": ["Posts"],
+                "responses": {
+                    "200": {
+                        "description": "Retorna todos os posts",
+                        "content": {
+                          "application/json": {
+                            "schema": {
+                              "type": "array",
+                              "example": [
+                                {
+                                  "id": 1,
+                                  "title": "Post 1",
+                                  "content": "Conteudo do post 1"
+                                },
+                                {
+                                  "id": 2,
+                                  "title": "Post 2",
+                                  "content": "Conteudo do post 2"
+                                },
+                                {
+                                  "id": 3,
+                                  "title": "Post 3",
+                                  "content": "Conteudo do post 3"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      },
                     "404": {
                         "description": "Nenhum post foi encontrado"
                     }

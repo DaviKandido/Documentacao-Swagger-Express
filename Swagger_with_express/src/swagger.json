@@ -100,7 +100,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
+                  "type": "array",
                   "example": [
                     {
                       "id": 1,
