@@ -161,5 +161,5 @@ app.get('/users', (req, res) => {
 
 ### VEJA UMA IMPLEMENTAÇÃO PASSO A PASSO EM: 
 
-* [Implemtação passo a passo](https://github.com/DaviKandido/Documentacao-Swagger-Express/tree/main/Swagger_with_express)
+* [Implementação passo a passo](https://github.com/DaviKandido/Documentacao-Swagger-Express/tree/main/Swagger_with_express)
 
