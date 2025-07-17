@@ -148,45 +148,45 @@ Podemos também colocar um conteudo de exemplo que será retornado ao obtermos o
 
 ```json
 "paths": {
-        "/posts":{
-            "summary": "Retorna todos os posts",
-            "description": "Essa rota será responsável por retorna todos os posts",
-            "get": {
-                "tags": ["Posts"],
-                "responses": {
-                    "200": {
-                        "description": "Retorna todos os posts",
-                        "content": {
-                          "application/json": {
-                            "schema": {
-                              "type": "array",
-                              "example": [
-                                {
-                                  "id": 1,
-                                  "title": "Post 1",
-                                  "content": "Conteudo do post 1"
-                                },
-                                {
-                                  "id": 2,
-                                  "title": "Post 2",
-                                  "content": "Conteudo do post 2"
-                                },
-                                {
-                                  "id": 3,
-                                  "title": "Post 3",
-                                  "content": "Conteudo do post 3"
-                                }
-                              ]
-                            }
+  "/posts":{
+      "summary": "Retorna todos os posts",
+      "description": "Essa rota será responsável por retorna todos os posts",
+      "get": {
+          "tags": ["Posts"],
+          "responses": {
+              "200": {
+                  "description": "Retorna todos os posts",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "array",
+                        "example": [
+                          {
+                            "id": 1,
+                            "title": "Post 1",
+                            "content": "Conteudo do post 1"
+                          },
+                          {
+                            "id": 2,
+                            "title": "Post 2",
+                            "content": "Conteudo do post 2"
+                          },
+                          {
+                            "id": 3,
+                            "title": "Post 3",
+                            "content": "Conteudo do post 3"
                           }
-                        }
-                      },
-                    "404": {
-                        "description": "Nenhum post foi encontrado"
+                        ]
+                      }
                     }
-                }
-            }
-        }
+                  }
+                },
+              "404": {
+                  "description": "Nenhum post foi encontrado"
+              }
+          }
+      }
+  }
 }
 ```
 
