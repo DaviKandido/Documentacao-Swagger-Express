@@ -55,20 +55,17 @@ const option = {
   },
   apis: [path.join(__dirname, "./routes/*.js")],
 };
+
+// Configurando o swagger
 const specs = swaggerJSDoc(option);
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
 app.use("/v1/posts", router);
 
-app.get("/v1/docs-swagger", (req, res) => {
-  res.sendFile(path.join(__dirname, "swagger.json"));
-});
-
 app.use((req, res) => {
   res.status(404).send({ message: "Page not found" });
 });
-
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

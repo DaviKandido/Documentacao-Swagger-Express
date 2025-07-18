@@ -1,4 +1,4 @@
-# Fazendo documentações de apis Express com Swagger
+# Fazendo documentações de apis Express com Swagger UI
 
 🧱 1. Instale a biblioteca
 
@@ -86,8 +86,8 @@ Agora vamos deixar essa cabeçalho um pouco mais completo, iremos adicionar uma 
         "version": "1.0.0",
         "termsOfService": "http://localhost:3000/terms/",
         "contact": {
-            "name": "Davi Cândido",
-            "email": "davicandidopucminas@gmail.com"
+            "name": "Usuário dono",
+            "email": "usuarioDono@gmail.com",
         }
     },
 ```
@@ -251,7 +251,7 @@ Para o método post teremos um tratamento um pouco diferente, teremos uma propri
 
 ### 🔐 8. Autenticação com JWT
 
-Extra: Caso a api use autentificações de segurança como JWT, também se é preciso informar em nossa documentação, para isso criamos um campo de securitySchemes no mesmo nível do schema em componentes
+Extra: Caso a api use autentificações de segurança como JWT, também se é preciso informar em nossa documentação, para isso criamos um campo de securitySchemes no mesmo nível do post em componentes
 
 ```json
 "components": {

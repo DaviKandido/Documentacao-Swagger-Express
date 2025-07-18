@@ -3,7 +3,7 @@
 let posts = [];
 let idMax = 1;
 
-
+// Função para criar um post
 function save(req, res) {
   // const { title, content } = req.body;
   const post = {
@@ -22,10 +22,12 @@ function save(req, res) {
   });
 }
 
+// Função para exibir todos os posts
 function index(req, res) {
   res.status(200).send(posts);
 }
 
+// Função para exibir um post
 function show(req, res) {
   const id = Number(req.params.id);
   const post = posts.find((post) => post.id === id);
@@ -35,6 +37,7 @@ function show(req, res) {
   res.status(200).send(post);
 }
 
+// Função para atualizar um post
 function update(req, res) {
   const id = Number(req.params.id);
   const post = posts.find((post) => post.id === id);
@@ -50,6 +53,7 @@ function update(req, res) {
   });
 }
 
+// Função para deletar um post
 function destroy(req, res) {
   const id = Number(req.params.id);
   const post = posts.find((post) => post.id === id);

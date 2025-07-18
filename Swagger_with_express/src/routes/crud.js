@@ -1,15 +1,19 @@
 const express = require("express");
 const router = express.Router();
 
-
+// Dados armazenados em memoria
 let posts = [];
 let idMax = 1;
 
+// Rotas
+
+// Rota para exibir todos os posts
 router.get("/", (req, res) => {
   console.log(posts);
   res.status(200).send(posts);
 });
 
+// Rota para exibir um post
 router.get("/:id", (req, res) => {
   const id = Number(req.params.id);
   const post = posts.find((post) => post.id === id);
@@ -19,6 +23,7 @@ router.get("/:id", (req, res) => {
   res.status(200).send(post);
 });
 
+// Rota para criar um post
 router.post("/", (req, res) => {
   // const { title, content } = req.body;
   const post = {
@@ -37,6 +42,7 @@ router.post("/", (req, res) => {
   });
 });
 
+// Rota para atualizar um post
 router.put("/:id", (req, res) => {
   const id = Number(req.params.id);
   const post = posts.find((post) => post.id === id);
@@ -52,6 +58,7 @@ router.put("/:id", (req, res) => {
   });
 });
 
+// Rota para deletar um post
 router.delete("/:id", (req, res) => {
   const id = Number(req.params.id);
   const post = posts.find((post) => post.id === id);
