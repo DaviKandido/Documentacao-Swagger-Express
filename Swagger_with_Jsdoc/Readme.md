@@ -359,7 +359,7 @@ De forma semelhante agora podemos criar a documentação de nossas rotas de _PUT
 router.put("/:id", crudController.update);
 ```
 
-### 🗑️ 11. DELETE `/posts/{id}`
+### 🗑️ 8. DELETE `/posts/{id}`
 
 E para a rota de delete:
 
@@ -387,7 +387,7 @@ E para a rota de delete:
  */
 router.delete("/:id", crudController.destroy);
 ```
-### 📁 8. Rota `/docs-swagger` para documentação JSON
+### 📁 9. Rota `/docs-swagger` para documentação JSON
 
 E para finalizar podemos documentar uma rota que será responsável por fornecer nossa documentação em json. O fornecimento será feito através do envio do próprio specs anteriormente definido:
 
@@ -418,7 +418,7 @@ router.get("/docs-swagger", (req, res) => {
 });
 ```
 
-### 🌐 9. Visualização final
+### 🌐 10. Visualização final
 
 Veja por fim como ficou nossa documentação de nossa api:
 
