@@ -74,7 +74,7 @@ Vera algo proximo a isso:
     <img src="assets/swagger-header.png" alt="Swagger UI Example" />
 </p>
 
-### 🐾 7. O que queremos? - Swagger-Petstore 
+### 🐾 3. O que queremos? - Swagger-Petstore 
 
 
 Swagger também possui uma documentação de teste em: [https://petstore.swagger.io/](https://petstore.swagger.io/) — é assim que queremos que nossa documentação final fique:
@@ -87,7 +87,7 @@ Você também pode acessar o JSON usado por essa documentação em: [https://pet
 
 
 
-### 📌 7. Mapeando rotas da API
+### 📌 4. Mapeando rotas da API
 
 #### Rota GET `/posts`
 
@@ -225,7 +225,7 @@ Para o método post teremos um tratamento um pouco diferente, teremos uma propri
 router.post("/", crudController.save);
 ```
 
-### 🔐 8. Autenticação com JWT
+### 🔐 5. Autenticação com JWT
 
 Extra: Caso a api use autentificações de segurança como JWT, também se é preciso informar em nossa documentação, para isso criamos um campo de securitySchemes no mesmo nível do post em componentes
 
@@ -279,7 +279,7 @@ Acesse novamente nossa documentação em http://localhost:3000/api-docs/ e veja 
 </p>
 
 
-### 🔍 9. Parâmetros em rotas
+### 🔍 6. Parâmetros em rotas
 
 #### GET `/posts/{id}`
 
@@ -318,7 +318,7 @@ Veja que agora na rota apresentada em nossa documentação sera criado um campo 
     <img src="assets/swagger-rota-params.png" alt="Swagger UI Example" />
 </p>
 
-### ✏️ 10. PUT `/posts/{id}` – Atualização completa
+### ✏️ 7. PUT `/posts/{id}` – Atualização completa
 
 De forma semelhante agora podemos criar a documentação de nossas rotas de _PUT_ (atualização total) e _DELETE_, para a rota de _PUT_ segue o exemplo a baixo, veremos que nada mais do que se trata de uma adição de um _requestBody_ para informar os dados que serão enviados para atualização do post pertencente ao id informado em _parameters_, veja:
 
@@ -387,7 +387,7 @@ E para a rota de delete:
  */
 router.delete("/:id", crudController.destroy);
 ```
-### 📁 12. Rota `/docs-swagger` para documentação JSON
+### 📁 8. Rota `/docs-swagger` para documentação JSON
 
 E para finalizar podemos documentar uma rota que será responsável por fornecer nossa documentação em json. O fornecimento será feito através do envio do próprio specs anteriormente definido:
 
@@ -418,7 +418,7 @@ router.get("/docs-swagger", (req, res) => {
 });
 ```
 
-### 🌐 13 Visualização final
+### 🌐 9. Visualização final
 
 Veja por fim como ficou nossa documentação de nossa api:
 
