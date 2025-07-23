@@ -24,42 +24,42 @@ app.use(express.json());
 
 const port = 3000;
 
-// Configurando o swagger
-const option = {
-  definition: {
-    openapi: "3.0.0",
-    info: {
-      title: "Swagger with Express",
-      description:
-        "Essa api tem como objetivo demonstra o uso do swagger com express",
-      version: "1.0.0",
-      license: {
-        name: "MIT",
+  // Configurando o swagger
+  const option = {
+    definition: {
+      openapi: "3.0.0",
+      info: {
+        title: "Swagger with Express",
+        description:
+          "Essa api tem como objetivo demonstra o uso do swagger com express",
+        version: "1.0.0",
+        license: {
+          name: "MIT",
+        },
+        termsOfService: "http://localhost:3000/terms/",
+        contact: {
+          name: "Davi Cândido",
+          email: "davicandidopucminas@gmail.com",
+        },
       },
-      termsOfService: "http://localhost:3000/terms/",
-      contact: {
-        name: "Davi Cândido",
-        email: "davicandidopucminas@gmail.com",
-      },
+      servers: [
+        {
+          url: "http://localhost:3000/v1",
+          description: "Ambiente de desenvolvimento",
+        },
+        {
+          url: "https://www.crudJourney.com/v2",
+          description: "Ambiente de produção",
+        },
+      ],
     },
-    servers: [
-      {
-        url: "http://localhost:3000/v1",
-        description: "Ambiente de desenvolvimento",
-      },
-      {
-        url: "https://www.crudJourney.com/v2",
-        description: "Ambiente de produção",
-      },
-    ],
-  },
-  apis: [path.join(__dirname, "./routes/*.js")],
-};
+    apis: [path.join(__dirname, "./routes/*.js")],
+  };
 
-// Configurando o swagger
-const specs = swaggerJSDoc(option);
+  // Configurando o swagger
+  const specs = swaggerJSDoc(option);
 
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
+  app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
 app.use("/v1/posts", router);
 
